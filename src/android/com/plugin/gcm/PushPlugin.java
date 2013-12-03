@@ -1,7 +1,6 @@
 package com.plugin.gcm;
 
 import java.util.Iterator;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +21,6 @@ import com.google.android.gcm.*;
 
 public class PushPlugin extends CordovaPlugin {
 	public static final String TAG = "PushPlugin";
-	
 	public static final String REGISTER = "register";
 	public static final String UNREGISTER = "unregister";
 	public static final String EXIT = "exit";
@@ -126,14 +124,12 @@ public class PushPlugin extends CordovaPlugin {
 		{
 			JSONObject json;
 			json = new JSONObject().put("event", "message");
-
 			JSONObject jsondata = new JSONObject();
 			Iterator<String> it = extras.keySet().iterator();
 			while (it.hasNext())
 			{
 				String key = it.next();
-				Object value = extras.get(key);
-
+				Object value = extras.get(key);	
 				// System data from Android
 				if (key.equals("from") || key.equals("collapse_key"))
 				{
@@ -154,7 +150,6 @@ public class PushPlugin extends CordovaPlugin {
 					{
 						json.put(key, value);
 					}
-
 					if ( value instanceof String ) {
 					// Try to figure out if the value is another JSON object
 						
@@ -189,7 +184,6 @@ public class PushPlugin extends CordovaPlugin {
 				}
 			} // while
 			json.put("payload", jsondata);
-
 			Log.v(TAG, "extrasToJSON: " + json.toString());
 
 			return json;
@@ -198,7 +192,7 @@ public class PushPlugin extends CordovaPlugin {
 		{
 			Log.e(TAG, "extrasToJSON: JSON exception");
 		}
-		return null;
+		return null;      	
     }
     
     public static boolean isActive()
