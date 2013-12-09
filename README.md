@@ -38,6 +38,7 @@ This plugin is for use with [Cordova](http://incubator.apache.org/cordova/), and
 
 1) copy the contents of **src/android/com/** to your project's **src/com/** folder.
    copy the contents of **libs/** to your **libs/** folder.
+   copy **{android_sdk_path}/extras/android/support/v13/android-support-v13.jar** to your **libs/** folder.
    The final hirearchy will likely look something like this;
 
 	{project_folder}
@@ -128,6 +129,18 @@ where
 	[PLATFORM] = ios or android
 	[TARGET-PATH] = path to folder containing your phonegap project
 	[PLUGIN-PATH] = path to folder containing this plugin
+```
+
+Alternatively this plugin can be installed using the Phonegap CLI.
+
+1) Navigaate to the root folder for your phonegap project.
+2) Run the command.
+
+```sh
+
+phonegap local plugin add https://github.com/phonegap-build/PushPlugin.git
+
+
 ```
 
 For additional info, take a look at the [Plugman Documentation](https://github.com/apache/cordova-plugman/blob/master/README.md)
@@ -243,7 +256,7 @@ function onNotificationGCM(e) {
 			$("#app-status-ul").append('<li>REGISTERED -> REGID:' + e.regid + "</li>");
 			// Your GCM push server needs to know the regID before it can push to this device
 			// here is where you might want to send it the regID for later use.
-			console.log("regID = " + e.regID);
+			console.log("regID = " + e.regid);
 		}
 	break;
 
