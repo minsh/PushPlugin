@@ -9,6 +9,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
+import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -29,6 +30,7 @@ public class PushPlugin extends CordovaPlugin {
 	private static String gECB;
 	private static String gSenderID;
 	private static Bundle gCachedExtras = null;
+  private static boolean gForeground = false;
 
 	/**
 	 * Gets the application context from cordova's main activity.
@@ -135,10 +137,12 @@ public class PushPlugin extends CordovaPlugin {
 
   @Override
   public void onDestroy() {
-      super.onDestroy();
+      /* SK */
+      GCMRegistrar.onDestroy(getApplicationContext());
       gForeground = false;
       gECB = null;
       gWebView = null;
+      super.onDestroy();
   }
 
   /*
@@ -220,17 +224,12 @@ public class PushPlugin extends CordovaPlugin {
 		}
 		return null;      	
     }
-    
+    public static boolean isInForeground()
+    {
+        return gForeground;
+    }
     public static boolean isActive()
     {
     	return gWebView != null;
     }
-    
-	public void onDestroy() 
-	{
-		GCMRegistrar.onDestroy(getApplicationContext());
-		gWebView = null;
-		gECB = null;
-		super.onDestroy();
-	}
 }
